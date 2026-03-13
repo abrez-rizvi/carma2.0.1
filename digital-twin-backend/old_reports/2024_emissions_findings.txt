@@ -1,0 +1,194 @@
+======================================================================
+                 2024 EMISSIONS DATA ANALYSIS REPORT
+======================================================================
+
+Data analyzed: 365 days of 2024
+
+----------------------------------------------------------------------
+                          AVERAGE VALUES
+----------------------------------------------------------------------
+
+  Total Emissions:         41.23
+  AQI:                     208.93
+
+  SECTOR BREAKDOWN (Raw Figures & Percentages):
+  ------------------------------------------------------------------
+  Sector                         Raw Figure      Percentage
+  ------------------------------------------------------------------
+  Aviation                             3.79           9.34%
+  Ground Transport                     5.32          13.08%
+  Industry                            13.75          33.75%
+  Power                               12.52          30.81%
+  Residential                          5.85          13.03%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                    YEAR-OVER-YEAR COMPARISON
+----------------------------------------------------------------------
+
+  COMPARISON WITH 2019:
+  ------------------------------------------------------------------
+  Metric                            2019         2024       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  36.57        41.23        +4.66     +12.7%
+  AQI                             214.68       208.93        -5.75      -2.7%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.75         3.79        +0.05      +1.2%
+    Ground Transport                5.65         5.32        -0.33      -5.8%
+    Industry                       12.19        13.75        +1.56     +12.8%
+    Power                           8.94        12.52        +3.58     +40.1%
+    Residential                     6.04         5.85        -0.19      -3.2%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2020:
+  ------------------------------------------------------------------
+  Metric                            2020         2024       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  32.34        41.23        +8.89     +27.5%
+  AQI                             185.28       208.93       +23.64     +12.8%
+
+  Sector Changes (Raw Figures):
+    Aviation                        1.83         3.79        +1.97    +107.7%
+    Ground Transport                5.45         5.32        -0.13      -2.4%
+    Industry                       10.62        13.75        +3.12     +29.4%
+    Power                           8.48        12.52        +4.04     +47.7%
+    Residential                     5.96         5.85        -0.11      -1.8%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2021:
+  ------------------------------------------------------------------
+  Metric                            2021         2024       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  34.72        41.23        +6.51     +18.7%
+  AQI                             208.58       208.93        +0.35      +0.2%
+
+  Sector Changes (Raw Figures):
+    Aviation                        2.18         3.79        +1.62     +74.3%
+    Ground Transport                5.45         5.32        -0.13      -2.4%
+    Industry                       12.08        13.75        +1.67     +13.8%
+    Power                           9.54        12.52        +2.98     +31.2%
+    Residential                     5.47         5.85        +0.38      +6.9%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2022:
+  ------------------------------------------------------------------
+  Metric                            2022         2024       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  39.81        41.23        +1.42      +3.6%
+  AQI                             209.23       208.93        -0.30      -0.1%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.16         3.79        +0.63     +19.9%
+    Ground Transport                5.43         5.32        -0.11      -2.0%
+    Industry                       13.08        13.75        +0.67      +5.1%
+    Power                          10.63        12.52        +1.89     +17.8%
+    Residential                     7.51         5.85        -1.66     -22.1%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2023:
+  ------------------------------------------------------------------
+  Metric                            2023         2024       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  42.41        41.23        -1.18      -2.8%
+  AQI                             203.56       208.93        +5.36      +2.6%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.52         3.79        +0.28      +7.9%
+    Ground Transport                5.30         5.32        +0.02      +0.4%
+    Industry                       13.76        13.75        -0.02      -0.1%
+    Power                          12.22        12.52        +0.31      +2.5%
+    Residential                     7.62         5.85        -1.77     -23.2%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                        RANGE STATISTICS
+----------------------------------------------------------------------
+
+  Total Emissions Range:   33.22 - 61.73
+  AQI Range:               52 - 494
+
+----------------------------------------------------------------------
+                     MONTHLY AVERAGES
+----------------------------------------------------------------------
+
+  Month             Avg Emissions         Avg AQI
+  --------------- --------------- ---------------
+  January                   55.17          354.84
+  February                  43.81          220.11
+  March                     40.24          172.81
+  April                     40.11          185.20
+  May                       39.64          223.94
+  June                      39.30          181.70
+  July                      37.74           96.68
+  August                    36.70           72.29
+  September                 37.44          103.97
+  October                   38.17          227.48
+  November                  39.41          373.63
+  December                  47.00          295.87
+
+----------------------------------------------------------------------
+                      IDENTIFIED TRENDS
+----------------------------------------------------------------------
+
+  EMISSION TRENDS:
+  - Highest average emissions in January (55.17)
+  - Lowest average emissions in August (36.70)
+  - Winter (Dec-Feb) average: 48.66
+  - Summer (Jun-Aug) average: 37.91
+  - OBSERVATION: Emissions are higher in winter months, likely due to increased
+                 heating demands reflected in higher residential emissions.
+
+  AIR QUALITY INDEX (AQI) TRENDS:
+  - Worst average AQI in November (374)
+  - Best average AQI in August (72)
+
+  SECTOR CONTRIBUTION ANALYSIS:
+  Emission sources ranked by contribution:
+    1. Industry: 33.75%
+    2. Power: 30.81%
+    3. Ground Transport: 13.08%
+    4. Residential: 13.03%
+    5. Aviation: 9.34%
+
+  KEY INSIGHTS:
+  - Industry sector is the largest contributor (33.75%) to emissions.
+  - Combined Industry + Power sectors account for 64.56% of emissions.
+  - Residential emissions vary significantly with seasons, indicating strong
+    correlation with heating/cooling needs.
+  - Transportation (Aviation + Ground) contributes 22.41% of total.
+
+  YEAR-OVER-YEAR INSIGHTS:
+  - Total emissions INCREASED by 12.7% compared to 2019.
+  - AQI IMPROVED by 2.7% compared to 2019.
+  - Total emissions INCREASED by 27.5% compared to 2020.
+  - AQI WORSENED by 12.8% compared to 2020.
+  - Total emissions INCREASED by 18.7% compared to 2021.
+  - AQI WORSENED by 0.2% compared to 2021.
+  - Total emissions INCREASED by 3.6% compared to 2022.
+  - AQI IMPROVED by 0.1% compared to 2022.
+  - Total emissions DECREASED by 2.8% compared to 2023.
+  - AQI WORSENED by 2.6% compared to 2023.
+
+----------------------------------------------------------------------
+                          CONCLUSION
+----------------------------------------------------------------------
+
+  The 2024 emissions data shows clear seasonal patterns with emissions
+  varying throughout the year based on heating/cooling demands.
+  The industrial and power sectors remain constant major contributors
+  throughout the year. AQI shows a correlation with emission levels,
+  with the worst air quality occurring during high-emission periods.
+
+  Notably, 2024 saw a significant INCREASE in emissions compared
+  to 2019.
+
+  Notably, 2024 saw a significant INCREASE in emissions compared
+  to 2020.
+
+  Notably, 2024 saw a significant INCREASE in emissions compared
+  to 2021.
+
+======================================================================
+                         END OF REPORT
+======================================================================

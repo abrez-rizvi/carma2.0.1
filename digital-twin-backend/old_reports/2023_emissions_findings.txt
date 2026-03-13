@@ -1,0 +1,180 @@
+======================================================================
+                 2023 EMISSIONS DATA ANALYSIS REPORT
+======================================================================
+
+Data analyzed: 365 days of 2023
+
+----------------------------------------------------------------------
+                          AVERAGE VALUES
+----------------------------------------------------------------------
+
+  Total Emissions:         42.41
+  AQI:                     203.56
+
+  SECTOR BREAKDOWN (Raw Figures & Percentages):
+  ------------------------------------------------------------------
+  Sector                         Raw Figure      Percentage
+  ------------------------------------------------------------------
+  Aviation                             3.52           8.31%
+  Ground Transport                     5.30          12.51%
+  Industry                            13.76          32.47%
+  Power                               12.22          28.82%
+  Residential                          7.62          17.89%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                    YEAR-OVER-YEAR COMPARISON
+----------------------------------------------------------------------
+
+  COMPARISON WITH 2019:
+  ------------------------------------------------------------------
+  Metric                            2019         2023       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  36.57        42.41        +5.84     +16.0%
+  AQI                             214.68       203.56       -11.12      -5.2%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.75         3.52        -0.23      -6.2%
+    Ground Transport                5.65         5.30        -0.35      -6.2%
+    Industry                       12.19        13.76        +1.57     +12.9%
+    Power                           8.94        12.22        +3.28     +36.6%
+    Residential                     6.04         7.62        +1.57     +26.0%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2020:
+  ------------------------------------------------------------------
+  Metric                            2020         2023       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  32.34        42.41       +10.08     +31.2%
+  AQI                             185.28       203.56       +18.28      +9.9%
+
+  Sector Changes (Raw Figures):
+    Aviation                        1.83         3.52        +1.69     +92.6%
+    Ground Transport                5.45         5.30        -0.15      -2.8%
+    Industry                       10.62        13.76        +3.14     +29.5%
+    Power                           8.48        12.22        +3.74     +44.1%
+    Residential                     5.96         7.62        +1.66     +27.9%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2021:
+  ------------------------------------------------------------------
+  Metric                            2021         2023       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  34.72        42.41        +7.69     +22.1%
+  AQI                             208.58       203.56        -5.01      -2.4%
+
+  Sector Changes (Raw Figures):
+    Aviation                        2.18         3.52        +1.34     +61.6%
+    Ground Transport                5.45         5.30        -0.15      -2.8%
+    Industry                       12.08        13.76        +1.68     +13.9%
+    Power                           9.54        12.22        +2.67     +28.0%
+    Residential                     5.47         7.62        +2.15     +39.3%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2022:
+  ------------------------------------------------------------------
+  Metric                            2022         2023       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  39.81        42.41        +2.61      +6.5%
+  AQI                             209.23       203.56        -5.67      -2.7%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.16         3.52        +0.35     +11.1%
+    Ground Transport                5.43         5.30        -0.13      -2.4%
+    Industry                       13.08        13.76        +0.69      +5.3%
+    Power                          10.63        12.22        +1.58     +14.9%
+    Residential                     7.51         7.62        +0.11      +1.5%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                        RANGE STATISTICS
+----------------------------------------------------------------------
+
+  Total Emissions Range:   35.09 - 50.69
+  AQI Range:               46 - 468
+
+----------------------------------------------------------------------
+                     MONTHLY AVERAGES
+----------------------------------------------------------------------
+
+  Month             Avg Emissions         Avg AQI
+  --------------- --------------- ---------------
+  January                   41.55          311.42
+  February                  43.56          237.36
+  March                     41.94          169.77
+  April                     42.15          179.63
+  May                       41.91          171.00
+  June                      42.32          129.77
+  July                      41.43           83.74
+  August                    42.50          116.48
+  September                 43.16          107.73
+  October                   42.79          217.77
+  November                  42.35          372.60
+  December                  43.40          347.97
+
+----------------------------------------------------------------------
+                      IDENTIFIED TRENDS
+----------------------------------------------------------------------
+
+  EMISSION TRENDS:
+  - Highest average emissions in February (43.56)
+  - Lowest average emissions in July (41.43)
+  - Winter (Dec-Feb) average: 42.84
+  - Summer (Jun-Aug) average: 42.09
+  - OBSERVATION: Emissions are higher in winter months, likely due to increased
+                 heating demands reflected in higher residential emissions.
+
+  AIR QUALITY INDEX (AQI) TRENDS:
+  - Worst average AQI in November (373)
+  - Best average AQI in July (84)
+
+  SECTOR CONTRIBUTION ANALYSIS:
+  Emission sources ranked by contribution:
+    1. Industry: 32.47%
+    2. Power: 28.82%
+    3. Residential: 17.89%
+    4. Ground Transport: 12.51%
+    5. Aviation: 8.31%
+
+  KEY INSIGHTS:
+  - Industry sector is the largest contributor (32.47%) to emissions.
+  - Combined Industry + Power sectors account for 61.29% of emissions.
+  - Residential emissions vary significantly with seasons, indicating strong
+    correlation with heating/cooling needs.
+  - Transportation (Aviation + Ground) contributes 20.82% of total.
+
+  YEAR-OVER-YEAR INSIGHTS:
+  - Total emissions INCREASED by 16.0% compared to 2019.
+  - AQI IMPROVED by 5.2% compared to 2019.
+  - Total emissions INCREASED by 31.2% compared to 2020.
+  - AQI WORSENED by 9.9% compared to 2020.
+  - Total emissions INCREASED by 22.1% compared to 2021.
+  - AQI IMPROVED by 2.4% compared to 2021.
+  - Total emissions INCREASED by 6.5% compared to 2022.
+  - AQI IMPROVED by 2.7% compared to 2022.
+
+----------------------------------------------------------------------
+                          CONCLUSION
+----------------------------------------------------------------------
+
+  The 2023 emissions data shows clear seasonal patterns with emissions
+  varying throughout the year based on heating/cooling demands.
+  The industrial and power sectors remain constant major contributors
+  throughout the year. AQI shows a correlation with emission levels,
+  with the worst air quality occurring during high-emission periods.
+
+  Notably, 2023 saw a significant INCREASE in emissions compared
+  to 2019.
+
+  Notably, 2023 saw a significant INCREASE in emissions compared
+  to 2020.
+
+  Notably, 2023 saw a significant INCREASE in emissions compared
+  to 2021.
+
+  Notably, 2023 saw a significant INCREASE in emissions compared
+  to 2022.
+
+======================================================================
+                         END OF REPORT
+======================================================================

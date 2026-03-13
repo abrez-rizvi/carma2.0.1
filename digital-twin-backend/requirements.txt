@@ -1,0 +1,38 @@
+# Core dependencies
+langchain
+langchain-community
+langchain-huggingface
+langchain-openai
+langchain-groq
+langchain-google-genai
+pydantic
+
+# LLM & Embeddings
+openai
+sentence-transformers
+huggingface-hub
+hf_transfer
+
+# Vector DB
+faiss-cpu
+
+# Web framework
+flask==3.0.0
+flask-cors==4.0.0
+
+# PDF processing
+pypdf==4.1.0
+
+# Utilities
+python-dotenv==1.0.0
+openpyxl==3.1.5
+pandas
+scikit-learn
+
+gunicorn
+xgboost
+folium
+selenium
+webdriver-manager
+shapely
+requests

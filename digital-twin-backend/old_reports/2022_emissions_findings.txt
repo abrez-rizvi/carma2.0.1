@@ -1,0 +1,160 @@
+======================================================================
+                 2022 EMISSIONS DATA ANALYSIS REPORT
+======================================================================
+
+Data analyzed: 365 days of 2022
+
+----------------------------------------------------------------------
+                          AVERAGE VALUES
+----------------------------------------------------------------------
+
+  Total Emissions:         39.81
+  AQI:                     209.23
+
+  SECTOR BREAKDOWN (Raw Figures & Percentages):
+  ------------------------------------------------------------------
+  Sector                         Raw Figure      Percentage
+  ------------------------------------------------------------------
+  Aviation                             3.16           7.98%
+  Ground Transport                     5.43          13.67%
+  Industry                            13.08          32.86%
+  Power                               10.63          26.70%
+  Residential                          7.51          18.78%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                    YEAR-OVER-YEAR COMPARISON
+----------------------------------------------------------------------
+
+  COMPARISON WITH 2019:
+  ------------------------------------------------------------------
+  Metric                            2019         2022       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  36.57        39.81        +3.24      +8.9%
+  AQI                             214.68       209.23        -5.45      -2.5%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.75         3.16        -0.58     -15.6%
+    Ground Transport                5.65         5.43        -0.22      -3.9%
+    Industry                       12.19        13.08        +0.88      +7.3%
+    Power                           8.94        10.63        +1.69     +18.9%
+    Residential                     6.04         7.51        +1.46     +24.2%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2020:
+  ------------------------------------------------------------------
+  Metric                            2020         2022       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  32.34        39.81        +7.47     +23.1%
+  AQI                             185.28       209.23       +23.95     +12.9%
+
+  Sector Changes (Raw Figures):
+    Aviation                        1.83         3.16        +1.34     +73.3%
+    Ground Transport                5.45         5.43        -0.02      -0.4%
+    Industry                       10.62        13.08        +2.45     +23.1%
+    Power                           8.48        10.63        +2.15     +25.4%
+    Residential                     5.96         7.51        +1.55     +26.0%
+  ------------------------------------------------------------------
+
+  COMPARISON WITH 2021:
+  ------------------------------------------------------------------
+  Metric                            2021         2022       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  34.72        39.81        +5.08     +14.6%
+  AQI                             208.58       209.23        +0.65      +0.3%
+
+  Sector Changes (Raw Figures):
+    Aviation                        2.18         3.16        +0.99     +45.4%
+    Ground Transport                5.45         5.43        -0.02      -0.4%
+    Industry                       12.08        13.08        +0.99      +8.2%
+    Power                           9.54        10.63        +1.09     +11.4%
+    Residential                     5.47         7.51        +2.04     +37.2%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                        RANGE STATISTICS
+----------------------------------------------------------------------
+
+  Total Emissions Range:   33.69 - 48.95
+  AQI Range:               44 - 450
+
+----------------------------------------------------------------------
+                     MONTHLY AVERAGES
+----------------------------------------------------------------------
+
+  Month             Avg Emissions         Avg AQI
+  --------------- --------------- ---------------
+  January                   38.70          278.55
+  February                  40.53          224.82
+  March                     40.91          217.19
+  April                     40.49          255.40
+  May                       39.33          212.16
+  June                      40.69          190.03
+  July                      39.04           87.39
+  August                    38.41           93.35
+  September                 39.84          104.43
+  October                   37.47          210.19
+  November                  40.74          320.60
+  December                  41.66          319.23
+
+----------------------------------------------------------------------
+                      IDENTIFIED TRENDS
+----------------------------------------------------------------------
+
+  EMISSION TRENDS:
+  - Highest average emissions in December (41.66)
+  - Lowest average emissions in October (37.47)
+  - Winter (Dec-Feb) average: 40.30
+  - Summer (Jun-Aug) average: 39.38
+  - OBSERVATION: Emissions are higher in winter months, likely due to increased
+                 heating demands reflected in higher residential emissions.
+
+  AIR QUALITY INDEX (AQI) TRENDS:
+  - Worst average AQI in November (321)
+  - Best average AQI in July (87)
+
+  SECTOR CONTRIBUTION ANALYSIS:
+  Emission sources ranked by contribution:
+    1. Industry: 32.86%
+    2. Power: 26.70%
+    3. Residential: 18.78%
+    4. Ground Transport: 13.67%
+    5. Aviation: 7.98%
+
+  KEY INSIGHTS:
+  - Industry sector is the largest contributor (32.86%) to emissions.
+  - Combined Industry + Power sectors account for 59.57% of emissions.
+  - Residential emissions vary significantly with seasons, indicating strong
+    correlation with heating/cooling needs.
+  - Transportation (Aviation + Ground) contributes 21.65% of total.
+
+  YEAR-OVER-YEAR INSIGHTS:
+  - Total emissions INCREASED by 8.9% compared to 2019.
+  - AQI IMPROVED by 2.5% compared to 2019.
+  - Total emissions INCREASED by 23.1% compared to 2020.
+  - AQI WORSENED by 12.9% compared to 2020.
+  - Total emissions INCREASED by 14.6% compared to 2021.
+  - AQI WORSENED by 0.3% compared to 2021.
+
+----------------------------------------------------------------------
+                          CONCLUSION
+----------------------------------------------------------------------
+
+  The 2022 emissions data shows clear seasonal patterns with emissions
+  varying throughout the year based on heating/cooling demands.
+  The industrial and power sectors remain constant major contributors
+  throughout the year. AQI shows a correlation with emission levels,
+  with the worst air quality occurring during high-emission periods.
+
+  Notably, 2022 saw a significant INCREASE in emissions compared
+  to 2019.
+
+  Notably, 2022 saw a significant INCREASE in emissions compared
+  to 2020.
+
+  Notably, 2022 saw a significant INCREASE in emissions compared
+  to 2021.
+
+======================================================================
+                         END OF REPORT
+======================================================================

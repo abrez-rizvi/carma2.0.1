@@ -1,0 +1,120 @@
+======================================================================
+                 2020 EMISSIONS DATA ANALYSIS REPORT
+======================================================================
+
+Data analyzed: 365 days of 2020
+
+----------------------------------------------------------------------
+                          AVERAGE VALUES
+----------------------------------------------------------------------
+
+  Total Emissions:         32.34
+  AQI:                     185.28
+
+  SECTOR BREAKDOWN (Raw Figures & Percentages):
+  ------------------------------------------------------------------
+  Sector                         Raw Figure      Percentage
+  ------------------------------------------------------------------
+  Aviation                             1.83           5.22%
+  Ground Transport                     5.45          17.08%
+  Industry                            10.62          33.16%
+  Power                                8.48          27.81%
+  Residential                          5.96          16.74%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                    YEAR-OVER-YEAR COMPARISON
+----------------------------------------------------------------------
+
+  COMPARISON WITH 2019:
+  ------------------------------------------------------------------
+  Metric                            2019         2020       Change   % Change
+  ------------------------------------------------------------------
+  Total Emissions                  36.57        32.34        -4.23     -11.6%
+  AQI                             214.68       185.28       -29.39     -13.7%
+
+  Sector Changes (Raw Figures):
+    Aviation                        3.75         1.83        -1.92     -51.3%
+    Ground Transport                5.65         5.45        -0.20      -3.5%
+    Industry                       12.19        10.62        -1.57     -12.8%
+    Power                           8.94         8.48        -0.46      -5.2%
+    Residential                     6.04         5.96        -0.09      -1.4%
+  ------------------------------------------------------------------
+
+----------------------------------------------------------------------
+                        RANGE STATISTICS
+----------------------------------------------------------------------
+
+  Total Emissions Range:   16.23 - 57.14
+  AQI Range:               41 - 477
+
+----------------------------------------------------------------------
+                     MONTHLY AVERAGES
+----------------------------------------------------------------------
+
+  Month             Avg Emissions         Avg AQI
+  --------------- --------------- ---------------
+  January                   48.75          285.68
+  February                  41.89          245.00
+  March                     30.08          128.23
+  April                     17.15          109.70
+  May                       23.45          143.74
+  June                      27.47          123.27
+  July                      29.32           83.81
+  August                    29.08           63.87
+  September                 31.62          118.70
+  October                   32.15          265.42
+  November                  34.09          327.93
+  December                  43.31          331.87
+
+----------------------------------------------------------------------
+                      IDENTIFIED TRENDS
+----------------------------------------------------------------------
+
+  EMISSION TRENDS:
+  - Highest average emissions in January (48.75)
+  - Lowest average emissions in April (17.15)
+  - Winter (Dec-Feb) average: 44.65
+  - Summer (Jun-Aug) average: 28.62
+  - OBSERVATION: Emissions are higher in winter months, likely due to increased
+                 heating demands reflected in higher residential emissions.
+
+  AIR QUALITY INDEX (AQI) TRENDS:
+  - Worst average AQI in December (332)
+  - Best average AQI in August (64)
+
+  SECTOR CONTRIBUTION ANALYSIS:
+  Emission sources ranked by contribution:
+    1. Industry: 33.16%
+    2. Power: 27.81%
+    3. Ground Transport: 17.08%
+    4. Residential: 16.74%
+    5. Aviation: 5.22%
+
+  KEY INSIGHTS:
+  - Industry sector is the largest contributor (33.16%) to emissions.
+  - Combined Industry + Power sectors account for 60.96% of emissions.
+  - Residential emissions vary significantly with seasons, indicating strong
+    correlation with heating/cooling needs.
+  - Transportation (Aviation + Ground) contributes 22.30% of total.
+
+  YEAR-OVER-YEAR INSIGHTS:
+  - Total emissions DECREASED by 11.6% compared to 2019.
+  - AQI IMPROVED by 13.7% compared to 2019.
+
+----------------------------------------------------------------------
+                          CONCLUSION
+----------------------------------------------------------------------
+
+  The 2020 emissions data shows clear seasonal patterns with emissions
+  varying throughout the year based on heating/cooling demands.
+  The industrial and power sectors remain constant major contributors
+  throughout the year. AQI shows a correlation with emission levels,
+  with the worst air quality occurring during high-emission periods.
+
+  Notably, 2020 saw a significant DECREASE in emissions compared
+  to 2019, possibly due to external factors affecting industrial activity.
+
+======================================================================
+                         END OF REPORT
+======================================================================
