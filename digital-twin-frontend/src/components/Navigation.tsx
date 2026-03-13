@@ -8,6 +8,7 @@ import {
   FlaskConical,
   BarChart,
   GitCompare,
+  Map,
   Menu,
   X,
 } from "lucide-react";
@@ -17,6 +18,7 @@ const NAV_SECTIONS = [
   { id: "policy-lab", label: "Policy Lab", icon: FlaskConical },
   { id: "results", label: "Results", icon: BarChart },
   { id: "comparison", label: "Compare", icon: GitCompare },
+  { id: "maps", label: "Maps", icon: Map },
 ];
 
 function scrollToSection(sectionId: string) {
@@ -35,13 +37,6 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/carma_logo.webp"
-              alt="CARMA Logo"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
             <div>
               <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
                 CARMA
