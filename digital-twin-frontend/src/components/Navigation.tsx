@@ -1,105 +1,141 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Microscope, Lightbulb, Heart, Menu, X } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import {
+  BarChart3,
+  FlaskConical,
+  BarChart,
+  GitCompare,
+  Menu,
+  X,
+} from "lucide-react";
 
-export default function Navigation() {
-  const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const NAV_SECTIONS = [
+  { id: "baseline", label: "Baseline", icon: BarChart3 },
+  { id: "policy-lab", label: "Policy Lab", icon: FlaskConical },
+  { id: "results", label: "Results", icon: BarChart },
+  { id: "comparison", label: "Compare", icon: GitCompare },
+];
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
+function scrollToSection(sectionId: string) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
 
-  const links = [
-    { href: "/", label: "Policy Simulator", icon: <Microscope className="w-4 h-4" /> },
-    { href: "/solutions", label: "Solutions", icon: <Lightbulb className="w-4 h-4" /> },
-    { href: "/health-impact", label: "Health Impact", icon: <Heart className="w-4 h-4" /> },
-  ];
+export function Navigation() {
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-60 bg-black/60 backdrop-blur-md border-b border-white/10 transition-all">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <Image
+              src="/carma_logo.webp"
+              alt="CARMA Logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <div>
+              <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+                CARMA
+              </span>
+              <span className="block text-[10px] text-white/30 -mt-0.5 tracking-wide">
+                Urban CO₂ digital twin
+              </span>
+            </div>
+          </Link>
 
-        {/* Brand / Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative flex items-center justify-center w-12 h-12 rounded-full overflow-hidden shadow-[0_0_15px_rgba(74,222,128,0.5)]">
-            <img src="/carma-logo.png" alt="Logo" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-bold tracking-tight group-hover:text-green-200 transition-colors">
-              <span className="text-green-500">CARMA</span>
-            </span>
-            <span className="text-sm font-medium text-slate-400">Urban CO₂ digital twin</span>
-          </div>
-        </Link>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative flex items-center gap-2 text-sm font-medium transition-all duration-300 ${isActive ? "text-green-400" : "text-slate-400 hover:text-white"
-                  }`}
-              >
-                {/* Glow dot for active state */}
-                {isActive && (
-                  <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_10px_#4ade80]" />
-                )}
-
-                <span className={isActive ? "text-green-400" : "opacity-70 group-hover:opacity-100"}>
-                  {link.icon}
-                </span>
-                {link.label}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          className="md:hidden flex items-center justify-center w-10 h-10 text-white/70 hover:text-white transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Panel */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/10 bg-black/80 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-2">
-            {links.map((link) => {
-              const isActive = pathname === link.href;
+          {/* Desktop Section Anchors */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_SECTIONS.map((section) => {
+              const Icon = section.icon;
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                    isActive
-                      ? "bg-white/10 text-green-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
-                  }`}
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className="flex items-center gap-1.5 px-3 py-2 text-sm text-white/50 hover:text-white rounded-lg transition-colors hover:bg-white/5 group"
                 >
-                  <span className={isActive ? "text-green-400" : "opacity-70"}>
-                    {link.icon}
-                  </span>
-                  {link.label}
-                </Link>
+                  <Icon className="w-4 h-4 text-white/40 group-hover:text-emerald-400 transition-colors" />
+                  {section.label}
+                </button>
               );
             })}
           </div>
+
+          {/* Page Links (secondary) */}
+          <div className="hidden md:flex items-center gap-3 text-xs">
+            <Link
+              href="/solutions"
+              className="text-white/30 hover:text-white/60 transition-colors px-2 py-1"
+            >
+              Solutions
+            </Link>
+            <Link
+              href="/health-impact"
+              className="text-white/30 hover:text-white/60 transition-colors px-2 py-1"
+            >
+              Health Impact
+            </Link>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden text-white/60 p-2"
+          >
+            {mobileOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
+          </button>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <div className="md:hidden py-4 border-t border-white/5 animate-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1">
+              {NAV_SECTIONS.map((section) => {
+                const Icon = section.icon;
+                return (
+                  <button
+                    key={section.id}
+                    onClick={() => {
+                      scrollToSection(section.id);
+                      setMobileOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                  >
+                    <Icon className="w-4 h-4" />
+                    {section.label}
+                  </button>
+                );
+              })}
+              <div className="border-t border-white/5 pt-2 mt-2">
+                <Link
+                  href="/solutions"
+                  className="block px-4 py-3 text-sm text-white/40 hover:text-white/60"
+                >
+                  Solutions Lab
+                </Link>
+                <Link
+                  href="/health-impact"
+                  className="block px-4 py-3 text-sm text-white/40 hover:text-white/60"
+                >
+                  Health Impact
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

@@ -1,5 +1,5 @@
-import CausalGraph from "../src/components/CausalGraph"
+import { SimulationDashboard } from "../src/components/SimulationDashboard";
 
-export default function Page() {
-  return <CausalGraph />
+export default function Home() {
+  return <SimulationDashboard />;
 }

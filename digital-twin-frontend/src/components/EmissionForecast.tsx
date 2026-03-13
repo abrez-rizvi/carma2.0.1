@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { API_BASE_URL } from '../config';
 import {
     LineChart,
     Line,
@@ -26,7 +25,7 @@ export function EmissionForecast() {
     const fetchForecast = async (nDays: number) => {
         setLoading(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/emission/forecast/days`, {
+            const response = await fetch('/api/emission/forecast/days', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ days: nDays })
