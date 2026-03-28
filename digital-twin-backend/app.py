@@ -36,6 +36,10 @@ register_emission_routes(app)
 from aqi_history import register_aqi_history_routes
 register_aqi_history_routes(app)
 
+# Register Ward Analysis routes (Hyper-Local AQI)
+from ward_analysis import register_ward_routes
+register_ward_routes(app)
+
 # Pre-initialize AQI Data & Model to prevent timeout on first request
 from aqi_history import get_aqi_history
 print("Initializing AQI History & Model...")

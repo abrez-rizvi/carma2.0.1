@@ -67,6 +67,12 @@ export function Navigation() {
           {/* Page Links (secondary) */}
           <div className="hidden md:flex items-center gap-3 text-xs">
             <Link
+              href="/hyper-local-aqi"
+              className="text-white/30 hover:text-white/60 transition-colors px-2 py-1"
+            >
+              AQI Insights
+            </Link>
+            <Link
               href="/solutions"
               className="text-white/30 hover:text-white/60 transition-colors px-2 py-1"
             >
@@ -114,6 +120,12 @@ export function Navigation() {
                 );
               })}
               <div className="border-t border-white/5 pt-2 mt-2">
+                <Link
+                  href="/hyper-local-aqi"
+                  className="block px-4 py-3 text-sm text-white/40 hover:text-white/60"
+                >
+                  AQI Insights
+                </Link>
                 <Link
                   href="/solutions"
                   className="block px-4 py-3 text-sm text-white/40 hover:text-white/60"
