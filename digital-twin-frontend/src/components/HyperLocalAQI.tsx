@@ -23,6 +23,9 @@ import {
   Wind,
   Layers,
   ChevronDown,
+  ChevronUp,
+  Search,
+  ArrowUpDown,
 } from "lucide-react";
 
 // ═══════════════════════════════════════════════════════════════════
@@ -112,6 +115,17 @@ export function HyperLocalAQI() {
   // Map view mode
   const [viewMode, setViewMode] = useState<MapViewMode>("risk");
 
+  // Pagination
+  const WARDS_PER_PAGE = 50;
+  const [tablePage, setTablePage] = useState(0);
+
+  // Ward search
+  const [wardSearch, setWardSearch] = useState("");
+
+  // Sort
+  const [sortKey, setSortKey] = useState<string | null>(null);
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+
   // Auto-refresh
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
@@ -156,6 +170,11 @@ export function HyperLocalAQI() {
     return () => clearInterval(interval);
   }, [autoRefresh, fetchData]);
 
+  // Reset page when filters / search change
+  useEffect(() => {
+    setTablePage(0);
+  }, [zoneFilter, riskFilter, sourceFilter, wardSearch, sortKey, sortDir]);
+
   // --- filtered data ---
   const filteredData = wardsData.filter((w) => {
     if (zoneFilter && w.Zone !== zoneFilter) return false;
@@ -196,6 +215,29 @@ export function HyperLocalAQI() {
     });
     return Object.entries(counts).map(([name, count]) => ({ name, count }));
   })();
+
+  // --- source color map for legend ---
+  const sourceColorMap = (() => {
+    const map: Record<string, string> = {};
+    filteredData.forEach((w) => {
+      const src = w.predicted_source || "";
+      if (!map[src]) {
+        let hash = 0;
+        for (let i = 0; i < src.length; i++)
+          hash = src.charCodeAt(i) + ((hash << 5) - hash);
+        map[src] = SOURCE_COLORS[Math.abs(hash) % SOURCE_COLORS.length];
+      }
+    });
+    return map;
+  })();
+
+  // --- risk/cluster ward counts for legend ---
+  const riskWardCounts: Record<string, number> = {};
+  const clusterWardCounts: Record<string, number> = {};
+  filteredData.forEach((w) => {
+    riskWardCounts[w.risk_level] = (riskWardCounts[w.risk_level] || 0) + 1;
+    clusterWardCounts[w.cluster_label] = (clusterWardCounts[w.cluster_label] || 0) + 1;
+  });
 
   // --- Leaflet map ---
   const getFeatureColor = useCallback(
@@ -331,9 +373,9 @@ export function HyperLocalAQI() {
   // --- stats ---
   const avgAQI = filteredData.length
     ? Math.round(
-        filteredData.reduce((s, w) => s + w.simulated_aqi, 0) /
-          filteredData.length
-      )
+      filteredData.reduce((s, w) => s + w.simulated_aqi, 0) /
+      filteredData.length
+    )
     : 0;
   const highRiskCount = filteredData.filter(
     (w) => w.risk_level === "High"
@@ -482,11 +524,10 @@ export function HyperLocalAQI() {
                   <button
                     key={mode.id}
                     onClick={() => setViewMode(mode.id)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                      viewMode === mode.id
-                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                        : "text-white/40 hover:text-white/60"
-                    }`}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === mode.id
+                      ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                      : "text-white/40 hover:text-white/60"
+                      }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
                     {mode.label}
@@ -496,22 +537,7 @@ export function HyperLocalAQI() {
             </div>
 
             {/* Auto-refresh toggle */}
-            <button
-              onClick={() => setAutoRefresh(!autoRefresh)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition-all ${
-                autoRefresh
-                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                  : "text-white/30 border border-white/10"
-              }`}
-            >
-              <RefreshCw
-                className={`w-3.5 h-3.5 ${
-                  autoRefresh ? "animate-spin" : ""
-                }`}
-                style={autoRefresh ? { animationDuration: "3s" } : {}}
-              />
-              {autoRefresh ? "Live" : "Paused"}
-            </button>
+
           </div>
           <div className="mt-2 text-[10px] text-white/20">
             Last updated: {lastRefresh.toLocaleTimeString()}
@@ -529,13 +555,14 @@ export function HyperLocalAQI() {
           />
 
           {/* Map legend overlay */}
-          <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md rounded-lg p-3 border border-white/10 text-xs">
-            <div className="font-bold text-white/70 mb-2">
+          <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md rounded-lg p-3 border border-white/10 text-xs" style={{ maxHeight: 260, overflowY: 'auto' }}>
+            <div className="font-bold text-white/70 mb-2 flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5" />
               {viewMode === "risk"
                 ? "Risk Level"
                 : viewMode === "cluster"
-                ? "Cluster"
-                : "Pollution Source"}
+                  ? "Cluster"
+                  : "Pollution Source"}
             </div>
             {viewMode === "risk" &&
               Object.entries(RISK_COLORS)
@@ -543,10 +570,11 @@ export function HyperLocalAQI() {
                 .map(([label, color]) => (
                   <div key={label} className="flex items-center gap-2 mb-1">
                     <div
-                      className="w-3 h-3 rounded-sm"
+                      className="w-3 h-3 rounded-sm flex-shrink-0"
                       style={{ background: color }}
                     />
                     <span className="text-white/60">{label}</span>
+                    <span className="text-white/30 ml-auto tabular-nums">{riskWardCounts[label] || 0}</span>
                   </div>
                 ))}
             {viewMode === "cluster" &&
@@ -555,17 +583,25 @@ export function HyperLocalAQI() {
                 .map(([label, color]) => (
                   <div key={label} className="flex items-center gap-2 mb-1">
                     <div
-                      className="w-3 h-3 rounded-sm"
+                      className="w-3 h-3 rounded-sm flex-shrink-0"
                       style={{ background: color }}
                     />
                     <span className="text-white/60">{label}</span>
+                    <span className="text-white/30 ml-auto tabular-nums">{clusterWardCounts[label] || 0}</span>
                   </div>
                 ))}
-            {viewMode === "source" && (
-              <span className="text-white/40">
-                Colors by predicted source
-              </span>
-            )}
+            {viewMode === "source" &&
+              Object.entries(sourceColorMap).map(([src, color]) => (
+                <div key={src} className="flex items-center gap-2 mb-1">
+                  <div
+                    className="w-3 h-3 rounded-sm flex-shrink-0"
+                    style={{ background: color }}
+                  />
+                  <span className="text-white/60 truncate" style={{ maxWidth: 160 }}>
+                    {src.length > 30 ? src.substring(0, 27) + "..." : src}
+                  </span>
+                </div>
+              ))}
           </div>
         </div>
 
@@ -585,8 +621,8 @@ export function HyperLocalAQI() {
                   data={sourceDistribution}
                   cx="50%"
                   cy="50%"
-                  outerRadius={110}
-                  innerRadius={55}
+                  outerRadius={100}
+                  innerRadius={50}
                   paddingAngle={2}
                   dataKey="value"
                   label={({ name = "", percent = 0 }) =>
@@ -609,6 +645,21 @@ export function HyperLocalAQI() {
                 />
               </PieChart>
             </ResponsiveContainer>
+            {/* Pie chart legend */}
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 max-h-24 overflow-y-auto px-1">
+              {sourceDistribution.map((entry, i) => (
+                <div key={entry.name} className="flex items-center gap-1.5 text-xs">
+                  <div
+                    className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
+                    style={{ background: PIE_COLORS[i % PIE_COLORS.length] }}
+                  />
+                  <span className="text-white/50 truncate" style={{ maxWidth: 140 }}>
+                    {entry.name}
+                  </span>
+                  <span className="text-white/30 tabular-nums">({entry.value})</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Bar: Risk Level Distribution */}
@@ -640,7 +691,20 @@ export function HyperLocalAQI() {
                   }}
                 />
                 <Legend
-                  wrapperStyle={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}
+                  content={() => (
+                    <div className="flex justify-center gap-5 mt-2">
+                      {riskDistribution.map((entry) => (
+                        <div key={entry.name} className="flex items-center gap-1.5 text-xs">
+                          <div
+                            className="w-3 h-3 rounded-sm"
+                            style={{ background: RISK_COLORS[entry.name] || "#6b7280" }}
+                          />
+                          <span className="text-white/50">{entry.name}</span>
+                          <span className="text-white/30 tabular-nums">({entry.count})</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 />
                 <Bar
                   dataKey="count"
@@ -660,115 +724,242 @@ export function HyperLocalAQI() {
         </div>
 
         {/* ── WARD TABLE ──────────────────────────────────────── */}
-        <div className="glass-panel p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="text-lg font-bold text-white">
-                Ward Details
-              </h3>
-              <p className="text-xs text-white/30">
-                Showing {filteredData.length} of {wardsData.length} wards
-              </p>
-            </div>
-            <button
-              onClick={fetchData}
-              className="btn-secondary text-xs"
-            >
-              <RefreshCw className="w-3.5 h-3.5" /> Refresh
-            </button>
-          </div>
+        {(() => {
+          // Column definitions for sort
+          const columns: { label: string; key: string }[] = [
+            { label: "Ward", key: "Ward_Name" },
+            { label: "Zone", key: "Zone" },
+            { label: "Population", key: "Population" },
+            { label: "Density", key: "Density" },
+            { label: "Risk", key: "risk_level" },
+            { label: "AQI", key: "simulated_aqi" },
+            { label: "Cluster", key: "cluster_label" },
+            { label: "Predicted Source", key: "predicted_source" },
+          ];
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-white/10">
-                  {[
-                    "Ward",
-                    "Zone",
-                    "Population",
-                    "Density",
-                    "Risk",
-                    "AQI",
-                    "Cluster",
-                    "Predicted Source",
-                  ].map((h) => (
-                    <th
-                      key={h}
-                      className="text-left py-3 px-3 text-white/40 font-medium text-xs"
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {filteredData.slice(0, 50).map((w) => (
-                  <tr
-                    key={w.Ward_No}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors"
+          // Search filter
+          const searchLower = wardSearch.toLowerCase();
+          const searchedData = wardSearch
+            ? filteredData.filter(
+              (w) =>
+                w.Ward_Name.toLowerCase().includes(searchLower) ||
+                w.Zone.toLowerCase().includes(searchLower) ||
+                w.predicted_source.toLowerCase().includes(searchLower) ||
+                w.Ward_No.toLowerCase().includes(searchLower)
+            )
+            : filteredData;
+
+          // Sort
+          const sortedData = sortKey
+            ? [...searchedData].sort((a, b) => {
+              const aVal = (a as any)[sortKey];
+              const bVal = (b as any)[sortKey];
+              if (typeof aVal === "number" && typeof bVal === "number") {
+                return sortDir === "asc" ? aVal - bVal : bVal - aVal;
+              }
+              const aStr = String(aVal || "").toLowerCase();
+              const bStr = String(bVal || "").toLowerCase();
+              return sortDir === "asc"
+                ? aStr.localeCompare(bStr)
+                : bStr.localeCompare(aStr);
+            })
+            : searchedData;
+
+          const totalPages = Math.ceil(sortedData.length / WARDS_PER_PAGE);
+          const pageData = sortedData.slice(
+            tablePage * WARDS_PER_PAGE,
+            (tablePage + 1) * WARDS_PER_PAGE
+          );
+
+          const handleSort = (key: string) => {
+            if (sortKey === key) {
+              setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+            } else {
+              setSortKey(key);
+              setSortDir("asc");
+            }
+          };
+
+          return (
+            <div className="glass-panel p-6">
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+                <div>
+                  <h3 className="text-lg font-bold text-white">
+                    Ward Details
+                  </h3>
+                  <p className="text-xs text-white/30">
+                    Showing {sortedData.length === 0 ? 0 : Math.min(tablePage * WARDS_PER_PAGE + 1, sortedData.length)}–{Math.min((tablePage + 1) * WARDS_PER_PAGE, sortedData.length)} of {sortedData.length} wards
+                    {wardSearch && ` (filtered from ${filteredData.length})`}
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  {/* Search input */}
+                  <div className="relative">
+                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={wardSearch}
+                      onChange={(e) => setWardSearch(e.target.value)}
+                      placeholder="Search ward, zone, source..."
+                      className="bg-white/5 border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white/70 placeholder:text-white/25 focus:outline-none focus:border-emerald-500/40 transition-colors w-56"
+                    />
+                    {wardSearch && (
+                      <button
+                        onClick={() => setWardSearch("")}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 text-xs"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                  <button
+                    onClick={fetchData}
+                    className="btn-secondary text-xs"
                   >
-                    <td className="py-2.5 px-3 text-white font-medium">
-                      {w.Ward_Name}
-                    </td>
-                    <td className="py-2.5 px-3 text-white/60">{w.Zone}</td>
-                    <td className="py-2.5 px-3 text-white/60">
-                      {w.Population?.toLocaleString()}
-                    </td>
-                    <td className="py-2.5 px-3 text-white/60">
-                      {w.Density}
-                    </td>
-                    <td className="py-2.5 px-3">
-                      <span
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium"
-                        style={{
-                          background: `${RISK_COLORS[w.risk_level]}20`,
-                          color: RISK_COLORS[w.risk_level],
-                          border: `1px solid ${RISK_COLORS[w.risk_level]}40`,
-                        }}
+                    <RefreshCw className="w-3.5 h-3.5" /> Refresh
+                  </button>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      {columns.map((col) => (
+                        <th
+                          key={col.key}
+                          onClick={() => handleSort(col.key)}
+                          className="text-left py-3 px-3 text-white/40 font-medium text-xs cursor-pointer select-none hover:text-white/70 transition-colors group"
+                        >
+                          <div className="flex items-center gap-1">
+                            {col.label}
+                            {sortKey === col.key ? (
+                              sortDir === "asc" ? (
+                                <ChevronUp className="w-3 h-3 text-emerald-400" />
+                              ) : (
+                                <ChevronDown className="w-3 h-3 text-emerald-400" />
+                              )
+                            ) : (
+                              <ArrowUpDown className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                            )}
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pageData.length === 0 && (
+                      <tr>
+                        <td colSpan={8} className="py-8 text-center text-white/30 text-sm">
+                          No wards match your search.
+                        </td>
+                      </tr>
+                    )}
+                    {pageData.map((w) => (
+                      <tr
+                        key={w.Ward_No}
+                        className="border-b border-white/5 hover:bg-white/5 transition-colors"
                       >
-                        {w.risk_level}
-                      </span>
-                    </td>
-                    <td className="py-2.5 px-3">
-                      <span
-                        className="font-mono font-bold"
-                        style={{
-                          color:
-                            w.simulated_aqi > 200
-                              ? "#ef4444"
-                              : w.simulated_aqi > 100
-                              ? "#eab308"
-                              : "#22c55e",
-                        }}
+                        <td className="py-2.5 px-3 text-white font-medium">
+                          {w.Ward_Name}
+                        </td>
+                        <td className="py-2.5 px-3 text-white/60">{w.Zone}</td>
+                        <td className="py-2.5 px-3 text-white/60">
+                          {w.Population?.toLocaleString()}
+                        </td>
+                        <td className="py-2.5 px-3 text-white/60">
+                          {w.Density}
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium"
+                            style={{
+                              background: `${RISK_COLORS[w.risk_level]}20`,
+                              color: RISK_COLORS[w.risk_level],
+                              border: `1px solid ${RISK_COLORS[w.risk_level]}40`,
+                            }}
+                          >
+                            {w.risk_level}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span
+                            className="font-mono font-bold"
+                            style={{
+                              color:
+                                w.simulated_aqi > 200
+                                  ? "#ef4444"
+                                  : w.simulated_aqi > 100
+                                    ? "#eab308"
+                                    : "#22c55e",
+                            }}
+                          >
+                            {w.simulated_aqi}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span
+                            className="text-xs"
+                            style={{
+                              color:
+                                CLUSTER_COLORS[w.cluster_label] || "#9ca3af",
+                            }}
+                          >
+                            {w.cluster_label}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3 text-white/50 text-xs max-w-[200px] truncate">
+                          {w.predicted_source}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {/* Pagination controls */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t border-white/5">
+                    <button
+                      onClick={() => setTablePage((p) => Math.max(0, p - 1))}
+                      disabled={tablePage === 0}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${tablePage === 0
+                        ? "text-white/20 cursor-not-allowed"
+                        : "text-white/60 hover:text-white hover:bg-white/10 border border-white/10"
+                        }`}
+                    >
+                      ← Previous
+                    </button>
+
+                    {Array.from({ length: totalPages }, (_, i) => i).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => setTablePage(page)}
+                        className={`w-8 h-8 rounded-lg text-xs font-medium transition-all ${page === tablePage
+                          ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                          : "text-white/40 hover:text-white/70 hover:bg-white/5"
+                          }`}
                       >
-                        {w.simulated_aqi}
-                      </span>
-                    </td>
-                    <td className="py-2.5 px-3">
-                      <span
-                        className="text-xs"
-                        style={{
-                          color:
-                            CLUSTER_COLORS[w.cluster_label] || "#9ca3af",
-                        }}
-                      >
-                        {w.cluster_label}
-                      </span>
-                    </td>
-                    <td className="py-2.5 px-3 text-white/50 text-xs max-w-[200px] truncate">
-                      {w.predicted_source}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {filteredData.length > 50 && (
-              <p className="text-center text-xs text-white/20 mt-3">
-                Showing first 50 of {filteredData.length} wards
-              </p>
-            )}
-          </div>
-        </div>
+                        {page + 1}
+                      </button>
+                    ))}
+
+                    <button
+                      onClick={() =>
+                        setTablePage((p) => Math.min(totalPages - 1, p + 1))
+                      }
+                      disabled={tablePage >= totalPages - 1}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${tablePage >= totalPages - 1
+                        ? "text-white/20 cursor-not-allowed"
+                        : "text-white/60 hover:text-white hover:bg-white/10 border border-white/10"
+                        }`}
+                    >
+                      Next →
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Leaflet popup/tooltip styles */}
